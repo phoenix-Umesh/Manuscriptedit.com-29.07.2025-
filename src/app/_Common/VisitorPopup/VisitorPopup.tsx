@@ -20,6 +20,8 @@ const VisitorPopup = ({
 
   const [countries, setCountries] = useState([]);
 
+
+
   console.log("Cont:", countries);
 
   const handleSubmit = async (e: any) => {
@@ -44,7 +46,7 @@ const VisitorPopup = ({
 
     try {
       const response = await fetch(
-        "https://www.secure.manuscriptedit.com/api/visitors_leads.php",
+        "https://secure.manuscriptedit.com/api/visitors_leads.php",
         {
           method: "POST",
           headers: {
@@ -133,7 +135,7 @@ const VisitorPopup = ({
   }, [isSubmitted]);
 
   useEffect(() => {
-    fetch("https://www.secure.manuscriptedit.com/api/get_all_country_list.php")
+    fetch("https://secure.manuscriptedit.com/api/get_all_country_list.php")
       .then((res) => res.json())
       .then((data) => {
         // Assuming the API returns an array like [{ name, code, dial_code }, ...]

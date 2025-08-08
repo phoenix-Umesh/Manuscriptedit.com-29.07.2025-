@@ -9,6 +9,9 @@ const useFetchClientList = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+
+    console.log("clientList:" , clientList)
+
     useEffect(() => {
         fetchClientList()
     },[])
@@ -17,7 +20,7 @@ const useFetchClientList = () => {
         setLoading(true)
         try {
           fetch(
-            `https://www.manuscriptedit.com/api/get_all_country_univer.php`, {
+            `https://secure.manuscriptedit.com/api/get_all_country_univer.php`, {
                 method: "get",
               }
           ).then(response => {

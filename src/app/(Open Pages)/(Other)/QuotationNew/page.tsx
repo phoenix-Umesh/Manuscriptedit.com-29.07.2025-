@@ -51,23 +51,27 @@ export default function ProjectQuote() {
   let [changeCaptcha, setChangeCaptcha] = useState(false);
   const [countries, setCountries] = useState<Country[]>([]);
 
+  console.log("Country:1", countries);
+
   type Country = {
     id: string;
     country: string;
   };
 
-  useEffect(() => {
-    fetch("https://www.secure.manuscriptedit.com/api/get_all_country_list.php")
-      .then((response) => response.json())
-      .then((data: any) => {
-        setCountries(data);
-        console.log("data.country", data);
-      })
-      .catch((error) => {
-        console.error("Error fetching country list:", error);
-      });
-  }, []);
-  console.log("countires", countries);
+useEffect(() => {
+  fetch("https://secure.manuscriptedit.com/api/get_all_country_list.php")
+    .then((response) => response.json())
+    .then((data: any) => {
+      console.log("Fetched Country Data:", data); // ✅ should be an array
+      setCountries(data); // ✅ directly set the array
+    })
+    .catch((error) => {
+      console.error("Error fetching country list:", error);
+    });
+}, []);
+
+
+  
   const captchaObj = [
     { image: captchaImg1, code: "22d5n" },
     { image: captchaImg2, code: "2356g" },
@@ -319,7 +323,7 @@ export default function ProjectQuote() {
 
     try {
       const response = await fetch(
-        "https://www.secure.manuscriptedit.com/api/submit_quotation_out.php",
+        "https://secure.manuscriptedit.com/api/submit_quotation_out.php",
         {
           method: "POST",
           headers: {
@@ -650,12 +654,9 @@ export default function ProjectQuote() {
                       required
                     >
                       <option value="">-- Select --</option>
-                      {countries.map((c: any, i) => (
-                        <option
-                          key={countries[i].country}
-                          value={countries[i].id}
-                        >
-                          {countries[i].country}
+                      {countries.map((c: any) => (
+                        <option key={c.id} value={c.id}>
+                          {c.country}
                         </option>
                       ))}
                     </select>
